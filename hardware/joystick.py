@@ -45,10 +45,13 @@ class Joystick:
 
     # GPIO 자원 정리
     def cleanup(self):
-        for button in self.buttons.values():
-            button.deinit()
+        for name, button in list(self.buttons.items()):
+            try:
+                button.deinit()
+                del self.buttons[name]
 
-        self.buttons.clear()
+            except Exception as e:
+                print(f"{name} GPIO 정리 오류: {e}")
 
 
 # 조이스틱 및 버튼 입력 테스트
