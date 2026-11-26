@@ -21,12 +21,20 @@ class Renderer:
         self.previews = []
 
         # 글꼴 설정
-        self.title_font = ImageFont.truetype(FONT_PATH, 22)
-        self.text_font = ImageFont.truetype(FONT_PATH, 12)
-        self.theme_font = ImageFont.truetype(FONT_PATH, 10)
+        self.title_font = self.load_font(22)
+        self.text_font = self.load_font(12)
+        self.theme_font = self.load_font(10)
 
         # 배경 이미지 불러오기
         self.load_backgrounds()
+
+    # 글꼴 불러오기
+    def load_font(self, size):
+        try:
+            return ImageFont.truetype(FONT_PATH, size)
+        except OSError:
+            print(f"글꼴 파일을 찾을 수 없습니다: {FONT_PATH}")
+            return ImageFont.load_default(size=size)
 
     # 배경 이미지 불러오기 
     def load_backgrounds(self):
