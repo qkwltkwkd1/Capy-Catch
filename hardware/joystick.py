@@ -29,7 +29,7 @@ class Joystick:
                 button.direction = digitalio.Direction.INPUT
                 button.pull = digitalio.Pull.UP
 
-        except Exception:
+        except BaseException:
             self.cleanup()
             raise
 
